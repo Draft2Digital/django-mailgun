@@ -34,7 +34,7 @@ def setUp():
 
 
 def check_output_value(mb, message, test_input, expected_output):
-    for k, v in test_input.iteritems():
+    for k, v in test_input.items():
         message.extra_headers[k] = v
     output = mb._map_smtp_headers_to_api_parameters(message)
     for extra_header in expected_output:
@@ -52,7 +52,7 @@ def test_extra_headers_map():
         'X-Mailgun-Track': 'yes',
         'X-Mailgun-Track-Clicks': 'htmlonly',
         'X-Mailgun-Track-Opens': 'no',
-        'X-Mailgun-Variables': 'my_message_id: 123',
+        'X-Mailgun-Variables': {'my_message_id': 123},
     }
     expected_output = [
         ('o:tag', 'Tag 1'),
@@ -64,6 +64,6 @@ def test_extra_headers_map():
         ('o:tracking', 'yes'),
         ('o:tracking-clicks', 'htmlonly'),
         ('o:tracking-opens', 'no'),
-        ('v:my-var', 'my_message_id: 123'),
+        ('v:my_message_id', 123),
     ]
     check_output_value(mb, message, test_input, expected_output)
