@@ -53,6 +53,6 @@ setup(
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     platforms=['any'],
-    install_requires=['requests', 'six',],
+    install_requires=['requests',],
     classifiers=CLASSIFIERS,
 )
